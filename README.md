@@ -3,8 +3,8 @@
 There are several node types in Stellar network and BOSCoin Tokennet(see https://www.stellar.org/developers/stellar-core/software/admin.html#level-of-participation-to-the-network). One of these is 'Watcher', this will sync the entire data from validator nodes, so you can monitor all the operations in the network.
 
 *note*
-* In unspecified time the node may lose the synced state.
-* You can submit the transaction to the network using watcher, but you should be careful, so it can be recommended.
+* In unspecified time the node may lose the synced state, but it will be catched up.
+* You can submit the transaction to the network using watcher, but you should be careful, so it is not recommended.
 * You must generate new secret seed for new watcher. See this page for generating new secret seed.
 * You should keep track your system time correctly.
 
