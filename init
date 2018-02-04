@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+set -x
+
+if [ -z "$NODE_SEED" ];then
+    echo '`NODE_SEED` is missing in environtal variable; `NODE_SEED` must be given.'
+    exit 1
+fi
+
+sed -e "s/^NODE_SEED=.*/NODE_SEED=\"$NODE_SEED self\"/g" /config.cfg > /config-touched.cfg
+
+ln -sf /usr/share/zoneinfo/UTC /etc/localtime
+
+service ntp stop || true
+service ntp start || true
+
+ntpdate -s 0.amazon.pool.ntp.org || true
+
+storage=/tokennet
+
+rm -rf $storage || true
+mkdir -p /tokennet
+
+/tokennet-core --conf /config-touched.cfg --newdb
+/tokennet-core --conf /config-touched.cfg
+
+# vim: set ft=sh:
