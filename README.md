@@ -31,6 +31,8 @@ Copy the newly generated secret seed.
 
 ## Deploy
 
+Before run it, you should sync the system time with the time server. If your system loses to sync, the watcher will not operate correctly.
+
 ```
 $ docker run -it -v <your core config file>:/config.cfg:ro -e NODE_SEED=<new secret seed> -p 11626:11626 tokennet-watcher
 ```
