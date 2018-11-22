@@ -19,10 +19,17 @@ ntpdate -s 0.amazon.pool.ntp.org || true
 
 storage=/tokennet
 
-rm -rf $storage || true
-mkdir -p /tokennet
+if [ "${INIT}" -eq 1 ];then
+    rm -rf $storage/* || true
+    mkdir -p /tokennet || true
+else
+    [ -d "$storage" ] || mkdir -p /tokennet
+fi
 
-/tokennet-core --conf /config-touched.cfg --newdb
+if [ "${INIT}" -eq 1 ];then
+    /tokennet-core --conf /config-touched.cfg --newdb
+fi
+
 /tokennet-core --conf /config-touched.cfg
 
 # vim: set ft=sh:
